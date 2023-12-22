@@ -1,7 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./src/db/connectDB");
-const { getAllTask } = require("./src/routes/taskHandler");
+const {
+    getAllTask,
+    deleteATask,
+    addTask,
+} = require("./src/routes/taskHandler");
 const port = process.env.PORT || 5000;
 
 const app = express();
@@ -13,6 +17,8 @@ app.use(
 );
 
 app.get("/tasks", getAllTask);
+app.post("/tasks", addTask);
+app.delete("/tasks/:id", deleteATask);
 
 app.get("/", (req, res) => {
     res.send("Task Task Task uff");

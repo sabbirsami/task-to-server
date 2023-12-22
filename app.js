@@ -11,6 +11,10 @@ app.use(
     })
 );
 
+app.post("/tasks", async (req, res) => {
+    console.log("object");
+});
+
 app.get("/", (req, res) => {
     res.send("Task Task Task uff");
 });

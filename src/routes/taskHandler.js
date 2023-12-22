@@ -18,6 +18,32 @@ const addTask = async (req, res) => {
         console.log("Error to get all task", error);
     }
 };
+const updateTask = async (req, res) => {
+    try {
+        const updatedTask = req.body;
+        const result = await Task.updateOne(
+            { _id: req.params.id },
+            {
+                $set: {
+                    title: updatedTask.title,
+                    priority: updatedTask.priority,
+                    status: updatedTask.status,
+                    deadline: updatedTask.deadline,
+                    description: updatedTask.description,
+                },
+            }
+        );
+        if (result.nModified > 0) {
+            return res
+                .status(200)
+                .json({ message: "imageUrl updated successfully" });
+        } else {
+            return res.status(404).json({ error: "imageUrl update fail" });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
 const deleteATask = async (req, res) => {
     try {
         const result = await Task.deleteOne({ _id: req.params.id });
@@ -26,4 +52,4 @@ const deleteATask = async (req, res) => {
         console.log("Can't delete", error);
     }
 };
-module.exports = { getAllTask, deleteATask, addTask };
+module.exports = { getAllTask, deleteATask, addTask, updateTask };

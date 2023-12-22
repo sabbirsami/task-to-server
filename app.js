@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./src/db/connectDB");
+const { getAllTask } = require("./src/routes/taskHandler");
 const port = process.env.PORT || 5000;
 
 const app = express();
@@ -11,9 +12,7 @@ app.use(
     })
 );
 
-app.post("/tasks", async (req, res) => {
-    console.log("object");
-});
+app.get("/tasks", getAllTask);
 
 app.get("/", (req, res) => {
     res.send("Task Task Task uff");
